@@ -1,5 +1,6 @@
 
 checkbox = {}
+window = {}
 
 function love.load()
 
@@ -18,7 +19,14 @@ function love.load()
 	checkbox.y = 245
 	checkbox.size = 30
 	
+	window.x = 0
+	window.y = 0
+	window.width = 625
+	window.barHeight = 50
+	window.height = 420
+	
 	drawChecked = false
+	mouseDownOnWindowBar = false
 end
 
 function love.update()
@@ -28,8 +36,6 @@ function love.draw()
 	--love.graphics.print('Hello World!', 200, 200)
 	--love.graphics.print('Text', printx, printy)
 	
-	x = 0
-	y = 0
 	rotation = 0
 	scalex = 1
 	scaley = 1
@@ -37,13 +43,14 @@ function love.draw()
 	offsety = 0
 	
 	if drawChecked then
-		love.graphics.draw(windowChecked,x,y,rotation, scalex, scaley, offsetx, offsety)
+		love.graphics.draw(windowChecked,window.x,window.y,rotation, scalex, scaley, offsetx, offsety)
 	else
-		love.graphics.draw(windowUnchecked,x,y,rotation, scalex, scaley, offsetx, offsety)
+		love.graphics.draw(windowUnchecked,window.x,window.y,rotation, scalex, scaley, offsetx, offsety)
 	end
 	
 
-	love.graphics.rectangle("line",checkbox.x, checkbox.y, checkbox.size, checkbox.size)
+	love.graphics.rectangle("line", window.x + checkbox.x, window.y + checkbox.y, checkbox.size, checkbox.size)
+	love.graphics.rectangle("line", window.x, window.y, window.width, window.barHeight)
 	
 end
 
@@ -55,18 +62,65 @@ function toggleCheckbox()
 	end
 end
 
-function love.mousepressed(x, y, button, istouch)
+function seeIfBoxChecked(x, y)
 	xIn = false
 	yIn = false
-	if x > checkbox.x and x < checkbox.x + checkbox.size then
+	if x > window.x + checkbox.x and x < window.x + checkbox.x + checkbox.size then
 		xIn = true
 	end
 	
-	if y > checkbox.y and x < checkbox.y + checkbox.size then
+	if y > window.y + checkbox.y and y < window.y + checkbox.y + checkbox.size then
 		yIn = true
 	end
 	
 	if xIn == true and yIn == true then
 		toggleCheckbox()
 	end
+end
+
+function seeIfWindowBarClicked(x, y)
+	xIn = false
+	yIn = false
+	if x > window.x and x < window.x + window.width then
+		xIn = true
+	end
+	
+	if y > window.y and y < window.y + window.barHeight then
+		yIn = true
+	end
+	
+	if xIn == true and yIn == true then
+		mouseDownOnWindowBar = true
+	else
+		mouseDownOnWindowBar = false
+	end
+end
+
+function love.mousepressed(x, y, button, istouch)
+	seeIfBoxChecked(x, y)
+	seeIfWindowBarClicked(x, y)
+end
+
+function love.mousemoved( x, y, dx, dy, istouch )
+	if mouseDownOnWindowBar == true then
+		window.x = window.x + dx
+		window.y = window.y + dy
+		
+		-- dont let the window go out of bounds though!
+		if window.x < 0 then
+			window.x = 0
+		elseif window.x + window.width > 800 then
+			window.x = 800 - window.width
+		end
+		
+		if window.y < 0 then
+			window.y = 0
+		elseif window.y + window.height > 600 then
+			window.y = 600 - window.height
+		end
+	end
+end
+
+function love.mousereleased( x, y, button, istouch, presses )
+	mouseDownOnWindowBar = false
 end
