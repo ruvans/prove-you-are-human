@@ -1,6 +1,9 @@
+require("levels.menu")
+local level1 = require("levels.level1")
 
 checkbox = {}
 window = {}
+gamestate = "menu"
 
 function love.load()
 
@@ -33,24 +36,24 @@ function love.update()
 end
 
 function love.draw()
-	--love.graphics.print('Hello World!', 200, 200)
-	--love.graphics.print('Text', printx, printy)
-	
+
 	rotation = 0
 	scalex = 1
 	scaley = 1
 	offsetx = 0
 	offsety = 0
-	
-	if drawChecked then
-		love.graphics.draw(windowChecked,window.x,window.y,rotation, scalex, scaley, offsetx, offsety)
-	else
-		love.graphics.draw(windowUnchecked,window.x,window.y,rotation, scalex, scaley, offsetx, offsety)
+	if gamestate == menu then
+		drawMenu()
 	end
+	--if drawChecked then
+	--	love.graphics.draw(windowChecked,window.x,window.y,rotation, scalex, scaley, offsetx, offsety)
+	--else
+	--	love.graphics.draw(windowUnchecked,window.x,window.y,rotation, scalex, scaley, offsetx, offsety)
+	--end
 	
 
-	love.graphics.rectangle("line", window.x + checkbox.x, window.y + checkbox.y, checkbox.size, checkbox.size)
-	love.graphics.rectangle("line", window.x, window.y, window.width, window.barHeight)
+	--love.graphics.rectangle("line", window.x + checkbox.x, window.y + checkbox.y, checkbox.size, checkbox.size)
+	--love.graphics.rectangle("line", window.x, window.y, window.width, window.barHeight)
 	
 end
 
