@@ -33,6 +33,12 @@ function love.load()
 end
 
 function love.update()
+	if gamestate == "menu" then
+		updateMenu()
+	end
+	if gamestate == "1" then
+		updateLevel1()
+	end
 end
 
 function love.draw()
@@ -42,8 +48,13 @@ function love.draw()
 	scaley = 1
 	offsetx = 0
 	offsety = 0
-	if gamestate == menu then
+	
+	--drawLevel1()
+	if gamestate == "menu" then
 		drawMenu()
+	end
+	if gamestate == "1" then
+		drawLevel1()
 	end
 	--if drawChecked then
 	--	love.graphics.draw(windowChecked,window.x,window.y,rotation, scalex, scaley, offsetx, offsety)
