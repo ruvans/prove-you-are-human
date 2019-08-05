@@ -20,3 +20,12 @@ end
 function drawMenu()
 	suit.draw()
 end
+
+function updateWinScreen()
+	suit.Label("you win", 100,150, 300,30)
+end
+
+function drawWinScreen()
+	suit.draw()
+end
+
