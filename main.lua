@@ -1,4 +1,5 @@
 require("levels.menu")
+suit = require 'levels.suit'
 local level1 = require("levels.level1")
 
 checkbox = {}
@@ -9,6 +10,7 @@ function love.load()
 
 	local myfont = love.graphics.newFont(45)
 	love.graphics.setFont(myfont)
+	suit.theme.color.active   = {bg = {200,230,255}, fg = {0,0,0}}
 	--love.graphics.setColor(0,153,0,225)
 	--love.graphics.setBackgroundColor(0,0,0)
 	
