@@ -17,8 +17,8 @@ function love.load()
 	printx = 0
 	printy = 0
 	
-	windowUnchecked = love.graphics.newImage('assets/lv1_window001.png')
-	windowChecked = love.graphics.newImage('assets/lv1_window002.png')
+	dialogWindow = love.graphics.newImage('assets/lv1_window001.png')
+
 	
 	checkbox.x = 180
 	checkbox.y = 245
@@ -35,6 +35,7 @@ function love.load()
 end
 
 function love.update()
+	
 	if gamestate == "menu" then
 		updateMenu()
 	end
