@@ -10,25 +10,25 @@ function love.load()
 
 	local myfont = love.graphics.newFont(45)
 	love.graphics.setFont(myfont)
-	suit.theme.color.active   = {bg = {200,230,255}, fg = {0,0,0}}
+	suit.theme.color.active   = {bg = {255,153,  0}, fg = {0,0,0}}
+	suit.theme.color.hovered.fg =  {0,0,0}
 	--love.graphics.setColor(0,153,0,225)
-	--love.graphics.setBackgroundColor(0,0,0)
+	love.graphics.setBackgroundColor(255,255,255)
 	
 	printx = 0
 	printy = 0
 	
-	dialogWindow = love.graphics.newImage('assets/lv1_window001.png')
-
+	dialogWindow = love.graphics.newImage('assets/empty_blue_window.png')
 	
 	checkbox.x = 180
 	checkbox.y = 245
 	checkbox.size = 30
 	
-	window.x = 0
-	window.y = 0
-	window.width = 625
+	window.x = 90
+	window.y = 50
+	window.width = 621
 	window.barHeight = 50
-	window.height = 420
+	window.height = 411
 	
 	drawChecked = false
 	mouseDownOnWindowBar = false
